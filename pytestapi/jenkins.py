@@ -7,4 +7,3 @@ class Jenkins(jenkins.Jenkins):
 
     def create_job(self, name, config_xml=jenkins.EMPTY_CONFIG_XML):
         super(Jenkins, self).create_job(name, config_xml)
-
