@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+# pytest_web
+Automated test platform (use pytest fastapi jenkins etc.)
+
+>>>>>>> origin/master
 ### 1.初始化 Init
 ##### 1.克隆项目 Clone project
 ```shell
@@ -20,4 +26,7 @@ use pip install command to install libs in requirements.txt
 #### 2.目前实现的接口 Currently implemented interface
 ##### 接口详情可通过访问 https://127.0.0.1:5000/docs查看
 ##### The interface details can be viewed by visiting https://127.0.0.1:5000/docs
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
