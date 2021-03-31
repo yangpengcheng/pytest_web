@@ -40,3 +40,8 @@ class JobArg(BaseModel):
 
 class ID(BaseModel):
     id: str
+
+
+class Object(BaseModel):
+    name: str
+    val: dict

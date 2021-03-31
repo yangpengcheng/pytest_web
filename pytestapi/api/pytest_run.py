@@ -57,7 +57,7 @@ async def run_tests_from_packages(arg: PytestArg):
     return TestResult(output).to_dict()
 
 
-@router.post("/pytest/list")
+@router.post("/pytest/list", tags=["获取最慢的记录"])
 async def get_slowest_list(arg: PytestArg):
     arg.r_arg = f'--durations={arg.r_arg}'
     arg.p_arg = f'--durations-min={arg.p_arg}'
