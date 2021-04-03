@@ -1,7 +1,10 @@
-from pytestapi.api import router
+from fastapi import APIRouter
+
 from pytestapi.command import Command
 from pytestapi.forms.args import PytestArg
 from pytestapi.view_models.result import TestResult
+
+router = APIRouter()
 
 
 @router.post("/pytest/run", tags=["pytest 执行测试"])

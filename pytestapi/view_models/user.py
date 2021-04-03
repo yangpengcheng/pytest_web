@@ -1,7 +1,7 @@
 class UserView:
     def __init__(self, user):
         self.id = user.id
-        self.email = user.email
+        self.username = user.username
         self.nickname = user.nickname
         self.status = user.status
         self.create_time = user.create_time

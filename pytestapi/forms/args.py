@@ -25,14 +25,14 @@ class JobArg(BaseModel):
     second: Optional[str] = None
     start_date: Optional[str] = None
     end_date: Optional[str] = None
-    timezone: Optional[str] = None
+    timezone: Optional[str] = 'Asia/Shanghai'
     jitter: Optional[int] = None
     run_date: Optional[str] = None
-    weeks: Optional[int] = None
-    days: Optional[int] = None
-    hours: Optional[int] = None
-    minutes: Optional[int] = None
-    seconds: Optional[int] = None
+    weeks: Optional[int] = 0
+    days: Optional[int] = 0
+    hours: Optional[int] = 0
+    minutes: Optional[int] = 0
+    seconds: Optional[int] = 0
 
     def to_dict(self):
         return {k: v for k, v in self.__dict__.items() if k not in ['command', 'id', 'trigger'] and v}
@@ -40,6 +40,10 @@ class JobArg(BaseModel):
 
 class ID(BaseModel):
     id: str
+
+
+class Name(BaseModel):
+    name: str
 
 
 class Object(BaseModel):

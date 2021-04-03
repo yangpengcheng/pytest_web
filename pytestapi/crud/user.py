@@ -1,11 +1,12 @@
-from pytestapi.models.user import User as UserModel, User
-from pytestapi.forms.user import UserCreate
+from pytestapi.enum import UserStatus
+from pytestapi.models.user import User as UserModel
+from pytestapi.forms.user import SimpleUser
 from pytestapi.database import db
 
 
 def authenticate_user(user):
     with db.not_commit():
-        db_user = db().query(UserModel).filter(UserModel.email == user.username).first()
+        db_user = db().query(UserModel).filter(UserModel.username == user.username).first()
     return db_user if (db_user and UserModel.verify_password(user.password, db_user.hashed_password)) else None
 
 
@@ -14,9 +15,9 @@ def get_user_by_id(user_id: int):
         return db().query(UserModel).filter(UserModel.id == user_id).first()
 
 
-def get_user_by_email(email: str):
+def get_user_by_username(username: str):
     with db.not_commit():
-        return db().query(UserModel).filter(UserModel.email == email).first()
+        return db().query(UserModel).filter(UserModel.username == username).first()
 
 
 def get_users(offset: int = 0, limit: int = 100):
@@ -24,12 +25,12 @@ def get_users(offset: int = 0, limit: int = 100):
         return db().query(UserModel).offset(offset).limit(limit).all()
 
 
-def get_user_count():
+def get_users_count():
     with db.not_commit():
         return db().query(UserModel).count()
 
 
-def create_user(user: UserCreate):
+def create_user(user: SimpleUser):
     db_user = UserModel()
     db_user.set_attrs(user.to_json())
     with db.auto_commit(db_user):
@@ -37,13 +38,12 @@ def create_user(user: UserCreate):
     return db_user
 
 
-def update_user(user: User):
+def set_user_status(db_user: UserModel, status: UserStatus):
     with db.auto_commit():
-        db().query(User).filter(User.id == user.id).update({'email': user.email})
-    return user
+        db_user.status = status
 
 
-def delete_user(user: User):
+def delete_user(user: UserModel):
     with db.auto_commit():
-        db().query(User).filter(User.id == user.id).update({'trash': True})
+        db().query(UserModel).filter(UserModel.id == user.id).update({'trash': True})
     return user
